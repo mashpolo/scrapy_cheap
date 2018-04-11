@@ -14,16 +14,9 @@ class MySpider(scrapy.Spider):
 
     def parse(self, response):
         # We want to inspect one specific response.
-        #items = response.xpath("//div/ul[@id='feed-main-list']/li[@class='feed-row-wide']")
-        items = response.xpath('//ul[@id="feed-main-list"]/li')
-        print len(items)
-        sss = items[19].xpath('//h5[@class="feed-block-title"]')
-        infos = sss[19].xpath("//a[@class='feed-nowrap']/@title").extract()
-        prices = sss[19].xpath("//a/div/text()").extract()
-        for (i, x) in enumerate(infos):
-            print x
-            print prices[i+1]
-        # for item in items:
-        #     info = item.xpath("//h5[@class='feed-block-title']/a/text()")[0]
-        #     print info
+        items = response.xpath("//div/ul[@id='feed-main-list']/li")
+        for item in items:
+            info = item.xpath(".//h5[@class='feed-block-title']/a/text()").extract_first()
+            prince = item.xpath(".//a/div[@class='z-highlight']/text()").extract_first()
+            print info, prince
 
