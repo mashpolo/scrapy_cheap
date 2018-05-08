@@ -11,4 +11,5 @@ import scrapy
 class SmzdmItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    good = scrapy.Field()
+    price = scrapy.Field()
