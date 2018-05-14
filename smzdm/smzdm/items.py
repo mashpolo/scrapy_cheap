@@ -14,3 +14,4 @@ class SmzdmItem(scrapy.Item):
     good = scrapy.Field()
     price = scrapy.Field()
     url = scrapy.Field()
+    store = scrapy.Field()

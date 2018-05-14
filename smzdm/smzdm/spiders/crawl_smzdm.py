@@ -12,7 +12,8 @@ from ..items import SmzdmItem
 
 class MySpider(scrapy.Spider):
     name = "smzdm"
-    start_urls = ["http://search.smzdm.com/?c=faxian&s=手机&v=a"]
+    start_urls = ["http://search.smzdm.com/?c=faxian&s=手机&v=a",
+                  "http://search.smzdm.com/?c=faxian&s=手机&v=a&p=2"]
 
     def parse(self, response):
         # We want to inspect one specific response.
@@ -22,5 +23,6 @@ class MySpider(scrapy.Spider):
             info["good"] = item.xpath(".//h5[@class='feed-block-title']/a/text()").extract_first()
             info["price"] = item.xpath(".//a/div[@class='z-highlight']/text()").extract_first()
             info["url"] = item.xpath(".//div[@class='feed-link-btn-inner']/a/@href").extract_first()
+            info["store"] = item.xpath(".//span[@class='feed-block-extras']/span/text()").extract_first()
             yield info
 
