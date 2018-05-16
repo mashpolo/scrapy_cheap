@@ -15,7 +15,7 @@ class SmzdmPipeline(object):
 
     def process_item(self, item, spider):
         # 优化价格的展示形式
-        price = item['price'].split('（')[0].strip()
+        price = item['price'].strip()
         good_name = item['good'].strip()
         good_url = item['url'].strip()
         store = item['store'].strip()
@@ -38,4 +38,8 @@ class SmzdmPipeline(object):
                                                           n_date,
                                                           1
                                                           ))
+
+        # 每次只保留每个用户,每个关键字的40条记录
+        self.cursor.execute("delete from smzdm where id in (select id from smzdm "
+                            "order by id desc limit (select count(*) from smzdm) offset 40) and user_id=1;")
         self.conn.commit()
