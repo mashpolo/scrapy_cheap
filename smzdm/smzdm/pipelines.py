@@ -15,7 +15,7 @@ class SmzdmPipeline(object):
 
     def process_item(self, item, spider):
         # 优化价格的展示形式
-        price = item['price'].strip()
+        price = item['price'].split('（')[0].strip()
         good_name = item['good'].strip()
         good_url = item['url'].strip()
         store = item['store'].strip()
